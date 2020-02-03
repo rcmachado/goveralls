@@ -226,16 +226,16 @@ func getCoverallsSourceFileName(name string) string {
 // processParallelFinish notifies coveralls that all jobs are completed
 // ref. https://docs.coveralls.io/parallel-build-webhook
 func processParallelFinish(jobID, token string) error {
-	var name string
+	/*var name string
 	if reponame != nil && *reponame != "" {
 		name = *reponame
 	} else if s := os.Getenv("GITHUB_REPOSITORY"); s != "" {
 		name = s
-	}
+	}*/
 
 	qs := make(url.Values)
 	qs.Set("repo_token", token)
-	qs.Set("repo_name", name)
+	// qs.Set("repo_name", name)
 
 	params := make(url.Values)
 	params.Set("payload[build_num]", jobID)
