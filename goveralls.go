@@ -233,12 +233,14 @@ func processParallelFinish(jobID, token string) error {
 		name = s
 	}
 
+	qs := make(url.Values)
+	qs.Set("repo_token", token)
+
 	params := make(url.Values)
-	params.Set("repo_token", token)
 	params.Set("repo_name", name)
 	params.Set("payload[build_num]", jobID)
 	params.Set("payload[status]", "done")
-	res, err := http.PostForm(*endpoint+"/webhook", params)
+	res, err := http.PostForm(*endpoint+"/webhook?"+qs.Encode(), params)
 	if err != nil {
 		return err
 	}
